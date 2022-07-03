@@ -1,0 +1,9 @@
+# vs code IDE
+.vs-code/
+
+# golang IDE
+.idea/
+
+# general
+# macOS
+.DS_Store

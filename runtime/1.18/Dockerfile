@@ -1,5 +1,11 @@
 # Start from the latest golang base image
-FROM golang:alpine AS builder
+FROM golang-1.18:alpine AS builder
+
+# maintainer
+LABEL maintainer="Amirhossein Najafizade"
+
+# timezon set
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 # Set the Current Working Directory inside the container
 WORKDIR /app
@@ -17,13 +23,20 @@ RUN go mod download
 COPY . .
 
 # Build the Go app
-WORKDIR /app/cmd/mqtt-blackbox-exporter
-RUN go build -o /mqtt-blackbox-exporter
+WORKDIR /app
+RUN go build -o /app-runner
 
+# Start the main app 
 FROM alpine:latest
 
+# Go into app directory
 WORKDIR /app/
 
-COPY --from=builder /mqtt-blackbox-exporter .
+# Copy the runner file
+COPY --from=builder /app-runner .
 
-ENTRYPOINT ["./mqtt-blackbox-exporter"]
+# Give access to runner file
+RUN chmox +x /app-runner
+
+# Entry point
+ENTRYPOINT ["./app-runner"]

@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
-UNAMEOUT="$(uname -s)"
+USER_NAME_OUT="$(uname -s)"
 
 # Verify operating system is supported...
-case "${UNAMEOUT}" in
+case "${USER_NAME_OUT}" in
     Linux*)             MACHINE=linux;;
     Darwin*)            MACHINE=mac;;
     *)                  MACHINE="UNKNOWN"
 esac
 
 if [ "$MACHINE" == "UNKNOWN" ]; then
-    echo "Unsupported operating system [$(uname -s)]. Laravel Sail supports macOS, Linux, and Windows (WSL2)." >&2
+    echo "Unsupported operating system [$(uname -s)]. Golang Mustache supports macOS, Linux, and Windows (WSL2)." >&2
 
     exit 1
 fi
@@ -18,9 +18,9 @@ fi
 # Determine if stdout is a terminal...
 if test -t 1; then
     # Determine if colors are supported...
-    ncolors=$(tput colors)
+    colors=$(tput colors)
 
-    if test -n "$ncolors" && test "$ncolors" -ge 8; then
+    if test -n "$colors" && test "$colors" -ge 8; then
         BOLD="$(tput bold)"
         YELLOW="$(tput setaf 3)"
         GREEN="$(tput setaf 2)"

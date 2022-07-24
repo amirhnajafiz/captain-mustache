@@ -140,7 +140,6 @@ function select_option {
 
     # cursor position back to normal
     cursor_to $lastrow
-    printf "\n"
     cursor_blink_on
 
     return $selected
@@ -150,17 +149,22 @@ function select_option {
 function select_opt {
     select_option "$@" 1>&2
     local result=$?
-    echo $result
     return $result
 }
 
 
-echo "Select one option using up/down keys and enter to confirm:"
+############################################################
+# Execute
+# shellcheck disable=SC2059
+printf "Welcome to ${blue}Golang Mustache${color_off} ...\n"
 
-options=("one" "two" "three")
+# Go version
+printf "Which go version do you use?\n"
 
-select_opt "${options[@]}"
-choice=$?
+go_version_options=("1.16" "1.17" "1.18")
 
-echo "Choosen index = $choice"
-echo "        value = ${options[$choice]}"
+select_opt "${go_version_options[@]}"
+go_version_choice=$?
+
+# shellcheck disable=SC2059
+printf "Selected Go version: ${green}${go_version_options[$go_version_choice]}${color_off}\n"

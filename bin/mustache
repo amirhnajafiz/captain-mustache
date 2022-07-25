@@ -177,5 +177,17 @@ mkdir $WORKING_DIR
 
 # copy dockerfile based on version
 DOCKER_PATH="./runtime/${go_version_options[$go_version_choice]}/Dockerfile"
+mkdir "$WORKING_DIR/build"
+cp "$DOCKER_PATH" "$WORKING_DIR/build"
 
-cp "$DOCKER_PATH" $WORKING_DIR
+# managing docker compose file
+DOCKER_COMPOSE="./stubs/docker-compose.yaml"
+cp "$DOCKER_COMPOSE" $WORKING_DIR
+DOCKER_COMPOSE="$WORKING_DIR/docker-compose.yaml"
+
+search="{{context}}"
+replace="\.\/build\/"
+
+if [[ $search != "" && $replace != "" ]]; then
+sed -i '' "s/$search/$replace/g" $DOCKER_COMPOSE
+fi

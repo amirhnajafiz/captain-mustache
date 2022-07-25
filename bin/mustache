@@ -169,5 +169,13 @@ go_version_choice=$?
 # shellcheck disable=SC2059
 printf "Selected Go version: ${green}${go_version_options[$go_version_choice]}${color_off}\n"
 
+# create directory for output
+WORKING_DIR="docker_out"
+
+if [ -d "$WORKING_DIR" ]; then rm -Rf $WORKING_DIR; fi
+mkdir $WORKING_DIR
+
 # copy dockerfile based on version
-dockerpath="./runtime/${go_version_options[$go_version_choice]}/Dockerfile"
+DOCKER_PATH="./runtime/${go_version_options[$go_version_choice]}/Dockerfile"
+
+cp "$DOCKER_PATH" $WORKING_DIR

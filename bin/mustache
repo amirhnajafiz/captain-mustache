@@ -187,7 +187,24 @@ DOCKER_COMPOSE="$WORKING_DIR/docker-compose.yaml"
 
 search="{{context}}"
 replace="\.\/build\/"
-
 if [[ $search != "" && $replace != "" ]]; then
-sed -i '' "s/$search/$replace/g" $DOCKER_COMPOSE
+  sed -i '' "s/$search/$replace/g" $DOCKER_COMPOSE
+fi
+
+search="{{depends}}"
+replace=" "
+if [[ $search != "" && $replace != "" ]]; then
+  sed -i '' "s/$search/$replace/g" $DOCKER_COMPOSE
+fi
+
+search="{{services}}"
+replace=" "
+if [[ $search != "" && $replace != "" ]]; then
+  sed -i '' "s/$search/$replace/g" $DOCKER_COMPOSE
+fi
+
+search="{{volumes}}"
+replace=" "
+if [[ $search != "" && $replace != "" ]]; then
+  sed -i '' "s/$search/$replace/g" $DOCKER_COMPOSE
 fi

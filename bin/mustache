@@ -156,10 +156,10 @@ function select_opt {
 ############################################################
 # Execute
 # shellcheck disable=SC2059
-printf "Welcome to ${blue}Golang Mustache${color_off} ...\n"
+printf "Welcome to ${IBlue}Golang Mustache${color_off} ...\n\n"
 
 # Go version
-printf "Which go version do you use?\n"
+printf "Which Go version do you use?\n"
 
 go_version_options=("1.16" "1.17" "1.18")
 
@@ -225,3 +225,14 @@ replace=" "
 if [[ $search != "" && $replace != "" ]]; then
   sed -i '' "s/$search/$replace/g" $DOCKER_COMPOSE
 fi
+
+# shellcheck disable=SC2059
+printf "\nYour files are ready in ${BBlue}docker_out/${color_off} directory.\n\n"
+printf "Copy directory files and place them next to your golang main file (which has the main package).\n"
+printf "After that use the following command to start your application on docker:\n"
+# shellcheck disable=SC2059
+printf "\t ${IBlue}docker-compose up -d${color_off}\n"
+printf "If you want to stop your application on docker, use the following command:\n"
+# shellcheck disable=SC2059
+printf "\t ${IBlue}docker-compose down${color_off}\n\n"
+printf "Thank you for using Golang Mustache.\n"

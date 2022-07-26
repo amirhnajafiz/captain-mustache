@@ -167,7 +167,7 @@ select_opt "${go_version_options[@]}"
 go_version_choice=$?
 
 # shellcheck disable=SC2059
-printf "Selected Go version: ${green}${go_version_options[$go_version_choice]}${color_off}\n"
+printf "${On_Yellow}Selected Go version:${color_off} ${green}${go_version_options[$go_version_choice]}${color_off}\n"
 
 # create directory for output
 WORKING_DIR="docker_out"
@@ -194,12 +194,12 @@ fi
 
 # port
 # shellcheck disable=SC2162
-read -p "what is your application entry port: (8080) " PORT
+read -p "What is your application entry port: (8080) " PORT
 if [[ $PORT == "" ]]; then
   PORT="8080"
 fi
 # shellcheck disable=SC2059
-printf "Selected port: ${green}${PORT}${color_off}\n"
+printf "${On_Yellow}Selected port:${color_off} ${green}${PORT}${color_off}\n"
 
 search="{{port}}"
 replace=$PORT

@@ -195,6 +195,8 @@ fi
 # port
 # shellcheck disable=SC2162
 read -p "what is your application entry port: " PORT
+# shellcheck disable=SC2059
+printf "Selected port: ${green}${PORT}${color_off}\n"
 
 search="{{port}}"
 replace=$PORT

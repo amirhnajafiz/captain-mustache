@@ -194,7 +194,10 @@ fi
 
 # port
 # shellcheck disable=SC2162
-read -p "what is your application entry port: " PORT
+read -p "what is your application entry port: (8080) " PORT
+if [[ $PORT == "" ]]; then
+  PORT="8080"
+fi
 # shellcheck disable=SC2059
 printf "Selected port: ${green}${PORT}${color_off}\n"
 

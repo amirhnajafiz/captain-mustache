@@ -185,12 +185,24 @@ DOCKER_COMPOSE="./stubs/docker-compose.yaml"
 cp "$DOCKER_COMPOSE" $WORKING_DIR
 DOCKER_COMPOSE="$WORKING_DIR/docker-compose.yaml"
 
+# context
 search="{{context}}"
 replace="\.\/build\/"
 if [[ $search != "" && $replace != "" ]]; then
   sed -i '' "s/$search/$replace/g" $DOCKER_COMPOSE
 fi
 
+# port
+# shellcheck disable=SC2162
+read -p "what is your application entry port: " PORT
+
+search="{{port}}"
+replace=$PORT
+if [[ $search != "" && $replace != "" ]]; then
+  sed -i '' "s/$search/$replace/g" $DOCKER_COMPOSE
+fi
+
+# others
 search="{{depends}}"
 replace=" "
 if [[ $search != "" && $replace != "" ]]; then

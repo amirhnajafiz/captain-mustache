@@ -205,7 +205,21 @@ if [[ $search != "" && $replace != "" ]]; then
 fi
 
 # go arch
+printf "Which architecture?\n"
 
+goarch_options=("amd" "amd64" "386" "arm" "arm64" "wasm")
+
+select_opt "${goarch_options[@]}"
+goarch_choice=$?
+
+# shellcheck disable=SC2059
+printf "${On_Yellow}Selected Go OS:${color_off} ${green}${goarch_options[$goarch_choice]}${color_off}\n"
+
+search="{{GOARCH}}"
+replace=${goarch_options[$goarch_choice]}
+if [[ $search != "" && $replace != "" ]]; then
+  sed -i '' "s/$search/$replace/g" "$WORKING_DIR/build/Dockerfile"
+fi
 
 # managing docker compose file
 DOCKER_COMPOSE="./stubs/docker-compose.yaml"

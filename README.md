@@ -8,7 +8,7 @@
 
 <p align="center">
     <img src="https://img.shields.io/badge/Docker-3.9-66ADD8?style=for-the-badge&logo=docker" alt="go version" />
-    <img src="https://img.shields.io/badge/Version-1.0.0-informational?style=for-the-badge&logo=none" alt="version" />
+    <img src="https://img.shields.io/badge/Version-1.1.0-informational?style=for-the-badge&logo=none" alt="version" />
 </p>
 
 Dockerize your Golang applications under Captain *Mustache*.

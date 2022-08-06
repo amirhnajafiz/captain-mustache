@@ -190,7 +190,7 @@ fi
 # go os
 printf "Which operating system?\n"
 
-goos_options=("linux" "darwin" "windows")
+goos_options=("aix" "android" "darwin" "dragonfly" "freebsd" "hurd" "illumos" "ios" "js" "linux" "nacl" "netbsd" "openbsd" "plan9" "solaris" "windows" "zos")
 
 select_opt "${goos_options[@]}"
 go_os_choice=$?

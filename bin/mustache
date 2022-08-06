@@ -176,9 +176,16 @@ if [ -d "$WORKING_DIR" ]; then rm -Rf $WORKING_DIR; fi
 mkdir $WORKING_DIR
 
 # copy dockerfile based on version
-DOCKER_PATH="./runtime/${go_version_options[$go_version_choice]}/Dockerfile"
+DOCKER_PATH="./runtime/Dockerfile"
 mkdir "$WORKING_DIR/build"
 cp "$DOCKER_PATH" "$WORKING_DIR/build"
+
+# docker version
+search="{{version}}"
+replace=${go_version_options[$go_version_choice]}
+if [[ $search != "" && $replace != "" ]]; then
+  sed -i '' "s/$search/$replace/g" "$WORKING_DIR/build/Dockerfile"
+fi
 
 # managing docker compose file
 DOCKER_COMPOSE="./stubs/docker-compose.yaml"

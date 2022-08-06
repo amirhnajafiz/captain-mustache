@@ -21,7 +21,7 @@ RUN go mod download
 
 # Build the Go app
 WORKDIR /app
-RUN {{GOOS}} {{GOARCH}} go build -o /app-runner
+RUN GOOS={{GOOS}} GOARCH={{GOARCH}} go build -o /app-runner
 
 # Start the main app 
 FROM alpine:latest

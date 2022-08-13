@@ -106,6 +106,7 @@ On_IWhite='\033[0;107m'   # White
 #                 "opt1" "opt2" ...
 #   Return value: selected index (0 for opt1, 1 for opt2 ...)
 function select_option {
+
     # little helpers for terminal print control and key input
     ESC=$( printf "\033")
     cursor_blink_on()  { printf "$ESC[?25h"; }
@@ -186,7 +187,7 @@ select_opt "${go_version_options[@]}"
 go_version_choice=$?
 
 # shellcheck disable=SC2059
-printf "${On_Yellow}Selected Go version:${color_off} ${green}${go_version_options[$go_version_choice]}${color_off}\n"
+printf "\n${On_Yellow}Selected Go version:${color_off} ${green}${go_version_options[$go_version_choice]}${color_off}\n\n"
 
 # create directory for output
 WORKING_DIR="docker_out"
@@ -210,15 +211,15 @@ fi
 printf "Which operating system?\n"
 
 # available go OS
-goos_options=("aix" "android" "darwin" "dragonfly" "freebsd" "hurd" "illumos"
-              "ios" "js" "linux" "nacl" "netbsd" "openbsd" "plan9" "solaris" "windows" "zos")
+goos_options=("aix" "android" "darwin" "dragonfly" "freebsd" "hurd" "illumos" "ios"
+              "js" "linux" "nacl" "netbsd" "openbsd" "plan9" "solaris" "windows" "zos")
 
 # select go OS
 select_opt "${goos_options[@]}"
 go_os_choice=$?
 
 # shellcheck disable=SC2059
-printf "${On_Yellow}Selected Go OS:${color_off} ${green}${goos_options[$go_os_choice]}${color_off}\n"
+printf "\n${On_Yellow}Selected Go OS:${color_off} ${green}${goos_options[$go_os_choice]}${color_off}\n\n"
 
 search="{{GOOS}}"
 replace=${goos_options[$go_os_choice]}
@@ -238,7 +239,7 @@ select_opt "${goarch_options[@]}"
 goarch_choice=$?
 
 # shellcheck disable=SC2059
-printf "${On_Yellow}Selected Go OS:${color_off} ${green}${goarch_options[$goarch_choice]}${color_off}\n"
+printf "\n${On_Yellow}Selected Go OS:${color_off} ${green}${goarch_options[$goarch_choice]}${color_off}\n\n"
 
 search="{{GOARCH}}"
 replace=${goarch_options[$goarch_choice]}
@@ -265,7 +266,7 @@ if [[ $PORT == "" ]]; then
   PORT="8080"
 fi
 # shellcheck disable=SC2059
-printf "${On_Yellow}Selected port:${color_off} ${green}${PORT}${color_off}\n"
+printf "\n${On_Yellow}Selected port:${color_off} ${green}${PORT}${color_off}\n\n"
 
 search="{{port}}"
 replace=$PORT

@@ -33,6 +33,20 @@ If you got error for executing the script, enter the following command and then 
 chmod +x ./bin/mustache
 ```
 
+## Next?
+Afet that you will get a _docker_out/_ directory. Move this directory next to your golang main file where
+you start your application.
+
+Now use the following command to start the container:
+```shell
+docker-compose up -d
+```
+
+For stopping the container, use:
+```shell
+docker-compose down
+```
+
 ## Supports
 - MacOS
 - Linux

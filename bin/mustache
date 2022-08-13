@@ -1,5 +1,19 @@
 #!/usr/bin/env bash
 
+############################################
+############# golang mustache ##############
+# welcome to golang mustache.
+#
+# bring your golang applications into docker
+# in less than a minute.
+#
+#
+# @author: Amirhnajafiz
+# @email: najafizadeh21@gmail.com
+# @year: 2020
+############################################
+
+# get username
 USER_NAME_OUT="$(uname -s)"
 
 # Verify operating system is supported...
@@ -9,13 +23,15 @@ case "${USER_NAME_OUT}" in
     *)                  MACHINE="UNKNOWN"
 esac
 
+# check host name
 if [ "$MACHINE" == "UNKNOWN" ]; then
     echo "Unsupported operating system [$(uname -s)]. Golang Mustache supports macOS, Linux, and Windows (WSL2)." >&2
-
     exit 1
 fi
 
-## Colors ##
+############################################
+################# Colors ###################
+
 # Reset
 color_off='\033[0m'       # Text Reset
 # Regular Colors
@@ -82,14 +98,14 @@ On_IPurple='\033[0;105m'  # Purple
 On_ICyan='\033[0;106m'    # Cyan
 On_IWhite='\033[0;107m'   # White
 
+############################################
+
 # Renders a text based list of options that can be selected by the
 # user using up, down and enter keys and returns the chosen option.
-#
 #   Arguments   : list of options, maximum of 256
 #                 "opt1" "opt2" ...
 #   Return value: selected index (0 for opt1, 1 for opt2 ...)
 function select_option {
-
     # little helpers for terminal print control and key input
     ESC=$( printf "\033")
     cursor_blink_on()  { printf "$ESC[?25h"; }
@@ -154,6 +170,7 @@ function select_opt {
 
 
 ############################################################
+
 # Execute
 # shellcheck disable=SC2059
 printf "Welcome to ${IBlue}Golang Mustache${color_off} ...\n\n"
@@ -161,8 +178,10 @@ printf "Welcome to ${IBlue}Golang Mustache${color_off} ...\n\n"
 # Go version
 printf "Which Go version do you use?\n"
 
+# available go versions
 go_version_options=("1.13" "1.14" "1.15" "1.16" "1.17" "1.18")
 
+# get go version
 select_opt "${go_version_options[@]}"
 go_version_choice=$?
 
@@ -190,8 +209,11 @@ fi
 # go os
 printf "Which operating system?\n"
 
-goos_options=("aix" "android" "darwin" "dragonfly" "freebsd" "hurd" "illumos" "ios" "js" "linux" "nacl" "netbsd" "openbsd" "plan9" "solaris" "windows" "zos")
+# available go OS
+goos_options=("aix" "android" "darwin" "dragonfly" "freebsd" "hurd" "illumos"
+              "ios" "js" "linux" "nacl" "netbsd" "openbsd" "plan9" "solaris" "windows" "zos")
 
+# select go OS
 select_opt "${goos_options[@]}"
 go_os_choice=$?
 
@@ -207,8 +229,11 @@ fi
 # go arch
 printf "Which architecture?\n"
 
-goarch_options=("386" "amd64" "amd64p32" "arm" "arm64" "arm64be" "armbe" "loong64" "mips" "mips64" "mips64le" "mips64p32" "mips64p32le" "mipsle" "ppc" "ppc64" "wasm")
+# available go Arch
+goarch_options=("386" "amd64" "amd64p32" "arm" "arm64" "arm64be" "armbe" "loong64"
+                "mips" "mips64" "mips64le" "mips64p32" "mips64p32le" "mipsle" "ppc" "ppc64" "wasm")
 
+# select go Arch
 select_opt "${goarch_options[@]}"
 goarch_choice=$?
 
@@ -266,6 +291,8 @@ replace=" "
 if [[ $search != "" && $replace != "" ]]; then
   sed -i '' "s/$search/$replace/g" $DOCKER_COMPOSE
 fi
+
+############################################
 
 # shellcheck disable=SC2059
 printf "\nYour files are ready in ${BBlue}docker_out/${color_off} directory.\n\n"

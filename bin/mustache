@@ -179,9 +179,13 @@ function docker_up() {
   printf "${BIBlue}Ship is going up ...${color_off}\n"
 
   if [ "$MACHINE" == "linux" ]; then
-    docker-compose up -d
+    # shellcheck disable=SC2006
+    X=`docker-compose up -d`
+    # printf "${BIGreen}$X${color_off}\n"
   else
-    docker compose up -d
+    # shellcheck disable=SC2006
+    X=`docker compose up -d`
+    # printf "${BIGreen}$X${color_off}\n"
   fi
 
   exit 0
@@ -192,9 +196,13 @@ function docker_down() {
   printf "${BIBlue}Ship is going down ...${color_off}\n"
 
   if [ "$MACHINE" == "linux" ]; then
-    docker-compose down
+    # shellcheck disable=SC2006
+    X=`docker-compose down`
+    # printf "${BIGreen}$X${color_off}\n"
   else
-    docker compose down
+    # shellcheck disable=SC2006
+    X=`docker compose down`
+    # printf "${BIGreen}$X${color_off}\n"
   fi
 
   exit 0

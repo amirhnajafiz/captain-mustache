@@ -172,6 +172,57 @@ function select_opt {
 
 ############################################################
 
+## docker functions ##
+
+function docker_up() {
+  # shellcheck disable=SC2059
+  printf "${BIBlue}Ship is going up ...${color_off}\n"
+
+  if [ "$MACHINE" == "linux" ]; then
+    # shellcheck disable=SC2006
+    X=`docker-compose up -d`
+    # printf "${BIGreen}$X${color_off}\n"
+  else
+    # shellcheck disable=SC2006
+    X=`docker compose up -d`
+    # printf "${BIGreen}$X${color_off}\n"
+  fi
+
+  exit 0
+}
+
+function docker_down() {
+  # shellcheck disable=SC2059
+  printf "${BIBlue}Ship is going down ...${color_off}\n"
+
+  if [ "$MACHINE" == "linux" ]; then
+    # shellcheck disable=SC2006
+    X=`docker-compose down`
+    # printf "${BIGreen}$X${color_off}\n"
+  else
+    # shellcheck disable=SC2006
+    X=`docker compose down`
+    # printf "${BIGreen}$X${color_off}\n"
+  fi
+
+  exit 0
+}
+
+####################
+
+# Docker commands
+if [ "$#" -gt 0 ]; then
+  if [ "$1" == "up" ]; then
+    docker_up
+  elif [ "$1" == "down" ]; then
+    docker_down
+  else
+    # shellcheck disable=SC2059
+    printf "${On_Red}Fatal: unknown command${color_off} ${BIRed}$1${color_off}\n"
+    exit 1
+  fi
+fi
+
 # Execute
 # shellcheck disable=SC2059
 printf "Welcome to ${IBlue}Golang Mustache${color_off} ...\n\n"

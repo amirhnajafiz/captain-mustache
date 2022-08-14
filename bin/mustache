@@ -172,6 +172,30 @@ function select_opt {
 
 ############################################################
 
+# Docker commands
+if [ "$#" -gt 0 ]; then
+  if [ "$1" == "up" ]; then
+    echo "Ship is going up ..."
+    if [ "$MACHINE" == "linux" ]; then
+      docker-compose up -d
+    else
+      docker compose up -d
+    fi
+    exit 0
+  elif [ "$1" == "down" ]; then
+    echo "Ship is going down ..."
+    if [ "$MACHINE" == "linux" ]; then
+      docker-compose down
+    else
+      docker compose down
+    fi
+    exit 0
+  else
+    echo "Fatal: unknown command $1"
+    exit 1
+  fi
+fi
+
 # Execute
 # shellcheck disable=SC2059
 printf "Welcome to ${IBlue}Golang Mustache${color_off} ...\n\n"

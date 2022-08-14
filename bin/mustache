@@ -172,26 +172,45 @@ function select_opt {
 
 ############################################################
 
+## docker functions ##
+
+function docker_up() {
+  # shellcheck disable=SC2059
+  printf "${BIBlue}Ship is going up ...${color_off}\n"
+
+  if [ "$MACHINE" == "linux" ]; then
+    docker-compose up -d
+  else
+    docker compose up -d
+  fi
+
+  exit 0
+}
+
+function docker_down() {
+  # shellcheck disable=SC2059
+  printf "${BIBlue}Ship is going down ...${color_off}\n"
+
+  if [ "$MACHINE" == "linux" ]; then
+    docker-compose down
+  else
+    docker compose down
+  fi
+
+  exit 0
+}
+
+####################
+
 # Docker commands
 if [ "$#" -gt 0 ]; then
   if [ "$1" == "up" ]; then
-    echo "Ship is going up ..."
-    if [ "$MACHINE" == "linux" ]; then
-      docker-compose up -d
-    else
-      docker compose up -d
-    fi
-    exit 0
+    docker_up
   elif [ "$1" == "down" ]; then
-    echo "Ship is going down ..."
-    if [ "$MACHINE" == "linux" ]; then
-      docker-compose down
-    else
-      docker compose down
-    fi
-    exit 0
+    docker_down
   else
-    echo "Fatal: unknown command $1"
+    # shellcheck disable=SC2059
+    printf "${On_Red}Fatal: unknown command${color_off} ${BIRed}$1${color_off}\n"
     exit 1
   fi
 fi

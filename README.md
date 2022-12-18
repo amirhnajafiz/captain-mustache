@@ -1,6 +1,8 @@
 <p align="center">
-    <img src=".github/readme/logo.png" width="192" alt="logo" />
+    <img src=".github/readme/logo.png" width="300" alt="logo" />
 </p>
+
+<br />
 
 <p align="center">
     <img src="https://img.shields.io/badge/Docker-3.9-66ADD8?style=for-the-badge&logo=docker" alt="go version" />

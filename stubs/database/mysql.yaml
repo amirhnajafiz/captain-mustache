@@ -1,6 +1,8 @@
     mysql:
-      image: 'bitnami/mysql:latest'
-      environment:
-        - ALLOW_EMPTY_PASSWORD=yes
-      networks:
-        - mustache
+        image: 'bitnami/mysql:latest'
+        environment:
+          - ALLOW_EMPTY_PASSWORD=yes
+        networks:
+          - mustache
+        volumes:
+          - 'mustache-volume:/bitnami/mysql'

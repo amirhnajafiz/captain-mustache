@@ -1,4 +1,6 @@
     postgresql:
-      image: 'bitnami/postgresql:latest'
-      networks:
-        - mustache
+        image: 'bitnami/postgresql:latest'
+        networks:
+          - mustache
+        volumes:
+          - 'mustache-volume:/bitnami/postgresql'

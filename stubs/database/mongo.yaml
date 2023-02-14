@@ -1,4 +1,6 @@
     mongodb:
-      image: 'bitnami/mongodb:latest'
-      networks:
-        - mustache
+        image: 'bitnami/mongodb:latest'
+        networks:
+          - mustache
+        volumes:
+          - 'mustache-volume:/bitnami/mongodb'

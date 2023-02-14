@@ -16,6 +16,16 @@ A fast, safe, dynamic way to create dockerfiles for you golang applications.
 With this tool you don't need to know docker to dockerize your applications, 
 all you need is to have docker installed on your system.
 
+<br />
+
+## Table of contents
+
+- [Install](#how-to-use)
+- [Commands](#commands)
+- [Stubs](#stubs)
+
+<br />
+
 ## How to use?
 
 Clone into the repository:

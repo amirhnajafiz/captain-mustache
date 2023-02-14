@@ -345,6 +345,10 @@ fi
 # shellcheck disable=SC2153
 cat "./stubs/network.yaml" >> "$DOCKER_COMPOSE"
 
+# volume
+# shellcheck disable=SC2153
+cat "./stubs/volume.yaml" >> "$DOCKER_COMPOSE"
+
 ############################################
 
 # shellcheck disable=SC2059

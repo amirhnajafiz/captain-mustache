@@ -335,6 +335,7 @@ if [[ $db_flag == 'y' ]]; then
   select_opt "${db_options[@]}"
   db_index=$?
   db_name=${db_options[$db_index]}
+  db_name=$(cat ./stubs/database/"$db_name".yaml)
 fi
 
 # others

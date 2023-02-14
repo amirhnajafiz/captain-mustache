@@ -1,0 +1,4 @@
+    postgresql:
+      image: 'bitnami/postgresql:latest'
+      networks:
+        - mustache

@@ -1,0 +1,4 @@
+    mongodb:
+      image: 'bitnami/mongodb:latest'
+      networks:
+        - mustache

@@ -337,7 +337,7 @@ if [[ $db_flag == 'y' ]]; then
   db_name=${db_options[$db_index]}
   # shellcheck disable=SC2116
   db_name=$(echo ./stubs/database/"$db_name".yaml)
-  cat db_name >> $DOCKER_COMPOSE
+  cat "${db_name}" >> $DOCKER_COMPOSE
 fi
 
 ############################################

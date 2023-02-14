@@ -13,9 +13,3 @@ services:
             - '.:/var/www/html'
         networks:
             - mustache
-{{depends}}
-{{services}}
-networks:
-    mustache:
-        driver: bridge
-{{volumes}}

@@ -325,6 +325,14 @@ if [[ $search != "" && $replace != "" ]]; then
   sed -i '' "s/$search/$replace/g" $DOCKER_COMPOSE
 fi
 
+# database
+db_flag='n'
+# shellcheck disable=SC2162
+read -p "Do you need database for your application: [y/n] " db_flag
+if [[ $db_flag == 'y' ]]; then
+  echo db_flag
+fi
+
 # others
 search="{{depends}}"
 replace=" "

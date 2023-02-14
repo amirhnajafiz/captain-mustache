@@ -47,6 +47,28 @@ For stopping the container, use:
 ./bin/mustache down
 ```
 
+<br />
+
+## Commands
+
+|   Command   | Description                                                      |
+|:-----------:|------------------------------------------------------------------|
+| ```build``` | Build dockerfile and docker compose for your application         |
+|  ```up```   | Start building docker containers based on ```docker_out``` files |
+| ```down```  | Stop docker containers                                           |
+
+<br />
+
+## Stubs
+
+|   Stub   | Description                                     | Values                                  |
+|:--------:|-------------------------------------------------|-----------------------------------------|
+| Database | Create database containers for your application | ```redis, mongodb, mysql, postgresql``` |
+| Network  | Create docker network for your containers       | ```mustache```                          |
+|  Volume  | Create docker volume for your containers        | ```mustache-volume```                   |
+
+<br />
+
 ## Supported OS
 
 - MacOS

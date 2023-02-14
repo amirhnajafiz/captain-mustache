@@ -217,10 +217,16 @@ if [ "$#" -gt 0 ]; then
   elif [ "$1" == "down" ]; then
     docker_down
   else
-    # shellcheck disable=SC2059
-    printf "${On_Red}Fatal: unknown command${color_off} ${BIRed}$1${color_off}\n"
-    exit 1
+    if [ "$1" != "build" ]; then
+      # shellcheck disable=SC2059
+      printf "${On_Red}Fatal: unknown command${color_off} ${BIRed}$1${color_off}\n"
+      exit 1
+    fi
   fi
+else
+  # shellcheck disable=SC2059
+  printf "${On_Red}Fatal: no command\n"
+  exit 1
 fi
 
 # Execute

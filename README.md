@@ -38,7 +38,7 @@ Execute the mustache script:
 
 ```shell
 chmod +x ./bin/mustache
-./bin/mustache
+./bin/mustache build
 ```
 <br />
 

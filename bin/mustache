@@ -231,7 +231,7 @@ printf "Welcome to ${IBlue}Golang Mustache${color_off} ...\n\n"
 printf "Which Go version do you use?\n"
 
 # available go versions
-go_version_options=("1.13" "1.14" "1.15" "1.16" "1.17" "1.18" "1.19")
+go_version_options=("1.15" "1.16" "1.17" "1.18" "1.19")
 
 # get go version
 select_opt "${go_version_options[@]}"
@@ -262,8 +262,8 @@ fi
 printf "Which operating system?\n"
 
 # available go OS
-goos_options=("aix" "android" "darwin" "dragonfly" "freebsd" "hurd" "illumos" "ios"
-              "js" "linux" "nacl" "netbsd" "openbsd" "plan9" "solaris" "windows" "zos")
+goos_options=("android" "darwin" "freebsd" "hurd" "ios"
+              "js" "linux" "netbsd" "openbsd" "plan9" "windows" "zos")
 
 # select go OS
 select_opt "${goos_options[@]}"
@@ -282,8 +282,8 @@ fi
 printf "Which architecture?\n"
 
 # available go Arch
-goarch_options=("386" "amd64" "amd64p32" "arm" "arm64" "arm64be" "armbe" "loong64"
-                "mips" "mips64" "mips64le" "mips64p32" "mips64p32le" "mipsle" "ppc" "ppc64" "wasm")
+goarch_options=("amd64" "amd64p32" "arm" "arm64"
+                "mips" "mips64" "mips64le" "mips64p32" "mips64p32le" "ppc" "ppc64" "wasm")
 
 # select go Arch
 select_opt "${goarch_options[@]}"

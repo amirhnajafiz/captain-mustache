@@ -6,7 +6,7 @@
 
 <p align="center">
     <img src="https://img.shields.io/badge/Docker-3.9-66ADD8?style=for-the-badge&logo=docker" alt="go version" />
-    <img src="https://img.shields.io/badge/Version-1.2.0-informational?style=for-the-badge&logo=github" alt="version" />
+    <img src="https://img.shields.io/badge/Version-1.2.1-informational?style=for-the-badge&logo=github" alt="version" />
 </p>
 
 <br />

@@ -237,7 +237,7 @@ printf "Welcome to ${IBlue}Golang Mustache${color_off} ...\n\n"
 printf "Which Go version do you use?\n"
 
 # available go versions
-go_version_options=("1.15" "1.16" "1.17" "1.18" "1.19")
+go_version_options=("1.15" "1.16" "1.17" "1.18" "1.19" "1.20")
 
 # get go version
 select_opt "${go_version_options[@]}"

@@ -1,6 +1,11 @@
 package main
 
-import "flag"
+import (
+	"flag"
+	"log"
+	"os"
+	"os/exec"
+)
 
 func main() {
 	var (
@@ -8,4 +13,14 @@ func main() {
 	)
 
 	flag.Parse()
+
+	command := exec.Command("./bin/mustache", *CommandFlag)
+
+	command.Stdin = os.Stdin
+	command.Stdout = os.Stdout
+	command.Stderr = os.Stderr
+
+	if er := command.Start(); er != nil {
+		log.Fatal(er)
+	}
 }

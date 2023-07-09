@@ -1,9 +1,11 @@
 package internal
 
-// SubCommand all network, stubs, volumes are subcommands
-type SubCommand struct {
-}
+type (
+	// SubCommand all network, stubs, volumes are subcommands
+	SubCommand struct {
+	}
 
-// Command each golang app is a command
-type Command struct {
-}
+	// Command each golang app is a command
+	Command struct {
+	}
+)

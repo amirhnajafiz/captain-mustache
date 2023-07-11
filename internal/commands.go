@@ -22,7 +22,7 @@ func (r Root) UpCommand() *cobra.Command {
 			root := exec.Command("docker", "compose", "up", "-d")
 
 			if err := root.Start(); err != nil {
-				// todo: error log
+				r.Logger.Error(err)
 			}
 		},
 	}
@@ -38,7 +38,7 @@ func (r Root) DownCommand() *cobra.Command {
 			root := exec.Command("docker", "compose", "down")
 
 			if err := root.Start(); err != nil {
-				// todo: error log
+				r.Logger.Error(err)
 			}
 		},
 	}
@@ -56,7 +56,7 @@ func (r Root) StatusCommand() *cobra.Command {
 			// todo: display result in user os
 
 			if err := root.Start(); err != nil {
-				// todo: error log
+				r.Logger.Error(err)
 			}
 		},
 	}

@@ -39,8 +39,21 @@ func DownCommand() *cobra.Command {
 }
 
 // StatusCommand returns a status of containers.
-func StatusCommand() {
+func StatusCommand() *cobra.Command {
+	return &cobra.Command{
+		Use:   "status",
+		Short: "containers status",
+		Long:  "display docker containers status by using docker ps",
+		Run: func(cmd *cobra.Command, args []string) {
+			root := exec.Command("docker", "ps", "-a")
 
+			// todo: display result in user os
+
+			if err := root.Start(); err != nil {
+				// todo: error log
+			}
+		},
+	}
 }
 
 // BuildCommand generates docker compose manifest.

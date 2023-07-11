@@ -7,5 +7,8 @@ type (
 
 	// Command each golang app is a command
 	Command struct {
+		Version     string
+		Image       string
+		SubCommands []SubCommand
 	}
 )

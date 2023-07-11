@@ -23,7 +23,7 @@ func WriteFile(reader io.Reader, path string) error {
 
 	w := bufio.NewWriter(f)
 
-	if _, err := w.ReadFrom(reader); err != nil {
+	if _, er := w.ReadFrom(reader); er != nil {
 		return ErrSystemFile
 	}
 

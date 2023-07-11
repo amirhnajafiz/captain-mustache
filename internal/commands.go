@@ -3,11 +3,17 @@ package internal
 import (
 	"os/exec"
 
+	"github.com/amirhnajafiz/captain-mustache/pkg/logger"
+
 	"github.com/spf13/cobra"
 )
 
+type Root struct {
+	Logger logger.Logger
+}
+
 // UpCommand starts docker containers.
-func UpCommand() *cobra.Command {
+func (r Root) UpCommand() *cobra.Command {
 	return &cobra.Command{
 		Use:   "up",
 		Short: "start containers",
@@ -23,7 +29,7 @@ func UpCommand() *cobra.Command {
 }
 
 // DownCommand stops docker containers.
-func DownCommand() *cobra.Command {
+func (r Root) DownCommand() *cobra.Command {
 	return &cobra.Command{
 		Use:   "down",
 		Short: "stop containers",
@@ -39,7 +45,7 @@ func DownCommand() *cobra.Command {
 }
 
 // StatusCommand returns a status of containers.
-func StatusCommand() *cobra.Command {
+func (r Root) StatusCommand() *cobra.Command {
 	return &cobra.Command{
 		Use:   "status",
 		Short: "containers status",
@@ -57,7 +63,7 @@ func StatusCommand() *cobra.Command {
 }
 
 // BuildCommand generates docker compose manifest.
-func BuildCommand() *cobra.Command {
+func (r Root) BuildCommand() *cobra.Command {
 	return &cobra.Command{
 		Use:   "build",
 		Short: "create manifest",

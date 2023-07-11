@@ -1,26 +1,35 @@
 package main
 
 import (
-	"flag"
-	"log"
-	"os"
-	"os/exec"
+	"github.com/amirhnajafiz/captain-mustache/internal"
+	"github.com/amirhnajafiz/captain-mustache/pkg/logger"
+
+	"github.com/spf13/cobra"
 )
 
 func main() {
-	var (
-		CommandFlag = flag.String("command", "build", "mustache command (build, up, down)")
+	// init logger
+	l := logger.Logger{
+		Mode: logger.DebugMode,
+	}
+
+	// init root commands
+	root := internal.Root{
+		Logger: l,
+	}
+
+	// create cobra root
+	cmd := cobra.Command{}
+
+	cmd.AddCommand(
+		root.DownCommand(),
+		root.UpCommand(),
+		root.StatusCommand(),
+		root.BuildCommand(),
 	)
 
-	flag.Parse()
-
-	command := exec.Command("./bin/mustache", *CommandFlag)
-
-	command.Stdin = os.Stdin
-	command.Stdout = os.Stdout
-	command.Stderr = os.Stderr
-
-	if er := command.Start(); er != nil {
-		log.Fatal(er)
+	// execute commands
+	if err := cmd.Execute(); err != nil {
+		l.Error(err)
 	}
 }

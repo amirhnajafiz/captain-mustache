@@ -22,6 +22,9 @@ func (r Root) UpCommand() *cobra.Command {
 		Run: func(cmd *cobra.Command, args []string) {
 			root := exec.Command("docker", "compose", "up", "-d")
 
+			root.Stdout = os.Stdout
+			root.Stderr = os.Stderr
+
 			if err := root.Start(); err != nil {
 				r.Logger.Error(err)
 			}
@@ -37,6 +40,9 @@ func (r Root) DownCommand() *cobra.Command {
 		Long:  "stop docker containers by using docker compose down",
 		Run: func(cmd *cobra.Command, args []string) {
 			root := exec.Command("docker", "compose", "down")
+
+			root.Stdout = os.Stdout
+			root.Stderr = os.Stderr
 
 			if err := root.Start(); err != nil {
 				r.Logger.Error(err)

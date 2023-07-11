@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"os"
 	"os/exec"
 
 	"github.com/amirhnajafiz/captain-mustache/pkg/logger"
@@ -53,7 +54,8 @@ func (r Root) StatusCommand() *cobra.Command {
 		Run: func(cmd *cobra.Command, args []string) {
 			root := exec.Command("docker", "ps", "-a")
 
-			// todo: display result in user os
+			root.Stdout = os.Stdout
+			root.Stderr = os.Stderr
 
 			if err := root.Start(); err != nil {
 				r.Logger.Error(err)

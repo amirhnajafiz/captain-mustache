@@ -57,6 +57,13 @@ func StatusCommand() *cobra.Command {
 }
 
 // BuildCommand generates docker compose manifest.
-func BuildCommand() {
-
+func BuildCommand() *cobra.Command {
+	return &cobra.Command{
+		Use:   "build",
+		Short: "create manifest",
+		Long:  "create docker compose and dockerfile",
+		Run: func(cmd *cobra.Command, args []string) {
+			// todo: implement the base logic
+		},
+	}
 }

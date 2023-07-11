@@ -23,8 +23,19 @@ func UpCommand() *cobra.Command {
 }
 
 // DownCommand stops docker containers.
-func DownCommand() {
+func DownCommand() *cobra.Command {
+	return &cobra.Command{
+		Use:   "down",
+		Short: "stop containers",
+		Long:  "stop docker containers by using docker compose down",
+		Run: func(cmd *cobra.Command, args []string) {
+			root := exec.Command("docker", "compose", "down")
 
+			if err := root.Start(); err != nil {
+				// todo: error log
+			}
+		},
+	}
 }
 
 // StatusCommand returns a status of containers.

@@ -1,12 +1,17 @@
 package internal
 
+type (
+	CommandType int
+	StubType    int
+)
+
 const (
-	MainCommand int = iota + 1
+	MainCommand CommandType = iota + 1
 	StubCommand
 )
 
 const (
-	DatabaseStub int = iota + 1
+	DatabaseStub StubType = iota + 1
 	VolumeStub
 	NetworkStub
 )

@@ -78,6 +78,10 @@ func (r Root) BuildCommand() *cobra.Command {
 		Long:  "create docker compose and dockerfile",
 		Run: func(cmd *cobra.Command, args []string) {
 			// todo: implement the base logic
+			// todo: get user inputs
+			// todo: make files
+			// todo: process files with inputs
+			// todo: generate output files
 		},
 	}
 }

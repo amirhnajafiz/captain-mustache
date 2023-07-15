@@ -29,6 +29,7 @@ var questions = []*survey.Question{
 	},
 }
 
+// importBaseQuestions returns the base user inputs
 func importBaseQuestions() (*BaseImports, error) {
 	tmp := new(BaseImports)
 
@@ -37,4 +38,34 @@ func importBaseQuestions() (*BaseImports, error) {
 	}
 
 	return tmp, nil
+}
+
+func importSubCommands() ([]*SubCommand, error) {
+	var (
+		commands    = make([]*SubCommand, 0)
+		volumeFlag  string
+		networkFlag string
+	)
+
+	// db selection
+
+	// network selection
+	if err := survey.AskOne(&survey.Select{
+		Message: "Do you want to have network?",
+		Options: []string{"Yes", "No"},
+		Default: "No",
+	}, &networkFlag); err != nil {
+		return nil, err
+	}
+
+	// volume selection
+	if err := survey.AskOne(&survey.Select{
+		Message: "Do you want to have volume?",
+		Options: []string{"Yes", "No"},
+		Default: "No",
+	}, &volumeFlag); err != nil {
+		return nil, err
+	}
+
+	return nil, nil
 }

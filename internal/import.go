@@ -28,3 +28,7 @@ var questions = map[string]*survey.Question{
 		},
 	},
 }
+
+func importQuestions() {
+
+}

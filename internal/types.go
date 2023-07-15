@@ -14,4 +14,8 @@ type (
 		Image       string
 		SubCommands []SubCommand
 	}
+
+	// Imports will be user base selects
+	Imports struct {
+	}
 )

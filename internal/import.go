@@ -11,4 +11,20 @@ var questions = map[string]*survey.Question{
 			Default: "1.20",
 		},
 	},
+	"arch": {
+		Name: "architecture",
+		Prompt: &survey.Select{
+			Message: "Choose your Go architecture:",
+			Options: []string{"arm64", "amd64"},
+			Default: "arm64",
+		},
+	},
+	"os": {
+		Name: "operating-system",
+		Prompt: &survey.Select{
+			Message: "Choose your Go operating system:",
+			Options: []string{"linux", "darwin", "windows"},
+			Default: "linux",
+		},
+	},
 }

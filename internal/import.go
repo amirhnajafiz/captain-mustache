@@ -2,8 +2,8 @@ package internal
 
 import "github.com/AlecAivazis/survey/v2"
 
-var questions = map[string]*survey.Question{
-	"go-version": {
+var questions = []*survey.Question{
+	{
 		Name: "go-version",
 		Prompt: &survey.Select{
 			Message: "Choose your Go version:",
@@ -11,7 +11,7 @@ var questions = map[string]*survey.Question{
 			Default: "1.20",
 		},
 	},
-	"arch": {
+	{
 		Name: "architecture",
 		Prompt: &survey.Select{
 			Message: "Choose your Go architecture:",
@@ -19,7 +19,7 @@ var questions = map[string]*survey.Question{
 			Default: "arm64",
 		},
 	},
-	"os": {
+	{
 		Name: "operating-system",
 		Prompt: &survey.Select{
 			Message: "Choose your Go operating system:",
@@ -29,6 +29,12 @@ var questions = map[string]*survey.Question{
 	},
 }
 
-func importQuestions() {
+func importBaseQuestions() (*BaseImports, error) {
+	tmp := new(BaseImports)
 
+	if err := survey.Ask(questions, tmp); err != nil {
+		return nil, err
+	}
+
+	return tmp, nil
 }

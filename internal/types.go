@@ -15,7 +15,10 @@ type (
 		SubCommands []SubCommand
 	}
 
-	// Imports will be user base selects
-	Imports struct {
+	// BaseImports will be user base selects
+	BaseImports struct {
+		GoVersion       string `survey:"go-version"`
+		Architecture    string `survey:"architecture"`
+		OperatingSystem string `survey:"operating-system"`
 	}
 )

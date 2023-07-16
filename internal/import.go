@@ -3,16 +3,25 @@ package internal
 import "github.com/AlecAivazis/survey/v2"
 
 // importBaseQuestions returns the base user inputs
-func importBaseQuestions() (*BaseImports, error) {
+func importBaseQuestions() (*Command, error) {
 	tmp := new(BaseImports)
 
 	if err := survey.Ask(dockerfileQuestions, tmp); err != nil {
 		return nil, err
 	}
 
-	return tmp, nil
+	list, er := importSubCommands()
+	if er != nil {
+		return nil, er
+	}
+
+	return &Command{
+		Imports:     tmp,
+		SubCommands: list,
+	}, nil
 }
 
+// importSubCommand will create sub commands
 func importSubCommands() ([]*SubCommand, error) {
 	var (
 		commands     = make([]*SubCommand, 0)

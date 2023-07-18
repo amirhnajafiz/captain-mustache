@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"log"
 	"os"
 	"os/exec"
 
@@ -77,6 +78,12 @@ func (r Root) BuildCommand() *cobra.Command {
 		Short: "create manifest",
 		Long:  "create docker compose and dockerfile",
 		Run: func(cmd *cobra.Command, args []string) {
+			command, err := importBaseQuestions()
+			if err != nil {
+				panic(err)
+			}
+
+			log.Println(command.Imports.GoVersion)
 			// todo: implement the base logic
 			// todo: get user inputs
 			// todo: make files

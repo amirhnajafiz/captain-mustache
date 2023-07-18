@@ -33,6 +33,5 @@ var (
 	dbQuestion = &survey.Select{
 		Message: "Choose a database:",
 		Options: []string{"redis", "mysql", "mongodb", "postgresql"},
-		Default: "redis",
 	}
 )

@@ -32,6 +32,10 @@ func importSubCommands() ([]*SubCommand, error) {
 
 	// db selection
 	for {
+		if len(dbQuestion.Options) == 0 {
+			break
+		}
+
 		if err := survey.AskOne(&survey.Select{
 			Message: "Do you want to have database?",
 			Options: []string{"Yes", "No"},
@@ -54,6 +58,8 @@ func importSubCommands() ([]*SubCommand, error) {
 			}
 
 			commands = append(commands, tmpCommand)
+
+			dbQuestion.Options = remove(dbQuestion.Options, tmp)
 		} else {
 			break
 		}

@@ -30,6 +30,8 @@ func importSubCommands() ([]*SubCommand, error) {
 		networkFlag  string
 	)
 
+	dbMessage := "Do you want to have database?"
+
 	// db selection
 	for {
 		if len(dbQuestion.Options) == 0 {
@@ -37,7 +39,7 @@ func importSubCommands() ([]*SubCommand, error) {
 		}
 
 		if err := survey.AskOne(&survey.Select{
-			Message: "Do you want to have database?",
+			Message: dbMessage,
 			Options: []string{"Yes", "No"},
 			Default: "No",
 		}, &databaseFlag); err != nil {
@@ -60,6 +62,8 @@ func importSubCommands() ([]*SubCommand, error) {
 			commands = append(commands, tmpCommand)
 
 			dbQuestion.Options = remove(dbQuestion.Options, tmp)
+
+			dbMessage = "Do you want to have another database?"
 		} else {
 			break
 		}

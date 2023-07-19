@@ -6,13 +6,13 @@ import (
 	"os"
 )
 
-func ReadFile(path string) (io.Reader, error) {
-	f, err := os.Open(path)
+func ReadFile(path string) (string, error) {
+	f, err := os.ReadFile(path)
 	if err != nil {
-		return nil, ErrFileNotFound
+		return "", ErrFileNotFound
 	}
 
-	return bufio.NewReader(f), nil
+	return string(f), nil
 }
 
 func WriteFile(reader io.Reader, path string) error {

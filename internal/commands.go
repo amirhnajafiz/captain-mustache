@@ -1,7 +1,8 @@
 package internal
 
 import (
-	"log"
+	"fmt"
+	"github.com/amirhnajafiz/captain-mustache/pkg/filesystem"
 	"os"
 	"os/exec"
 
@@ -78,12 +79,18 @@ func (r Root) BuildCommand() *cobra.Command {
 		Short: "create manifest",
 		Long:  "create docker compose and dockerfile",
 		Run: func(cmd *cobra.Command, args []string) {
-			command, err := importBaseQuestions()
+			//_, err := importBaseQuestions()
+			//if err != nil {
+			//	panic(err)
+			//}
+
+			f, err := filesystem.ReadFile("src/runtime/Dockerfile")
 			if err != nil {
 				panic(err)
 			}
 
-			log.Println(command.Imports.GoVersion)
+			fmt.Println(f)
+
 			// todo: implement the base logic
 			// todo: get user inputs
 			// todo: make files

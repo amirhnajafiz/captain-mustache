@@ -1,5 +1,7 @@
 package internal
 
+import "os"
+
 func remove(s []string, r string) []string {
 	for i, v := range s {
 		if v == r {
@@ -7,4 +9,17 @@ func remove(s []string, r string) []string {
 		}
 	}
 	return s
+}
+
+func exists(path string) (bool, error) {
+	_, err := os.Stat(path)
+	if err == nil {
+		return true, nil
+	}
+
+	if os.IsNotExist(err) {
+		return false, nil
+	}
+
+	return false, err
 }

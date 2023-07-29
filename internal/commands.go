@@ -79,6 +79,14 @@ func (r Root) BuildCommand() *cobra.Command {
 		Short: "create manifest",
 		Long:  "create docker compose and dockerfile",
 		Run: func(cmd *cobra.Command, args []string) {
+			if ok, err := exists("build"); err != nil && !ok {
+				panic(err)
+			}
+
+			if err := os.Mkdir("build", 0750); err != nil {
+				panic(err)
+			}
+
 			command, err := importBaseQuestions()
 			if err != nil {
 				panic(err)

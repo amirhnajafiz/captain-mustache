@@ -102,13 +102,20 @@ func (r Root) BuildCommand() *cobra.Command {
 			f = strings.Replace(f, "{{GOOS}}", command.Imports.OperatingSystem, 1)
 			f = strings.Replace(f, "{{GOARCH}}", command.Imports.Architecture, 1)
 
-			if er := filesystem.WriteFile(f, "Dockerfile"); er != nil {
+			if er := filesystem.WriteFile(f, "build/Dockerfile"); er != nil {
 				panic(err)
 			}
 
-			// todo: make files
+			f, err = filesystem.ReadFile("src/runtime/docker-compose.yaml")
+			if err != nil {
+				panic(err)
+			}
+
 			// todo: process files with inputs
-			// todo: generate output files
+
+			if err := filesystem.WriteFile("docker-compose.yaml", f); err != nil {
+				panic(err)
+			}
 		},
 	}
 }

@@ -1,10 +1,6 @@
 package filesystem
 
-import (
-	"bufio"
-	"io"
-	"os"
-)
+import "os"
 
 func ReadFile(path string) (string, error) {
 	f, err := os.ReadFile(path)
@@ -15,17 +11,13 @@ func ReadFile(path string) (string, error) {
 	return string(f), nil
 }
 
-func WriteFile(reader io.Reader, path string) error {
+func WriteFile(content, path string) error {
 	f, err := os.Create(path)
 	if err != nil {
 		return ErrCreateFile
 	}
 
-	w := bufio.NewWriter(f)
+	_, err = f.WriteString(content)
 
-	if _, er := w.ReadFrom(reader); er != nil {
-		return ErrSystemFile
-	}
-
-	return nil
+	return err
 }

@@ -1,10 +1,10 @@
 package internal
 
 import (
-	"fmt"
 	"github.com/amirhnajafiz/captain-mustache/pkg/filesystem"
 	"os"
 	"os/exec"
+	"strings"
 
 	"github.com/amirhnajafiz/captain-mustache/pkg/logger"
 
@@ -79,20 +79,25 @@ func (r Root) BuildCommand() *cobra.Command {
 		Short: "create manifest",
 		Long:  "create docker compose and dockerfile",
 		Run: func(cmd *cobra.Command, args []string) {
-			//_, err := importBaseQuestions()
-			//if err != nil {
-			//	panic(err)
-			//}
+			command, err := importBaseQuestions()
+			if err != nil {
+				panic(err)
+			}
 
 			f, err := filesystem.ReadFile("src/runtime/Dockerfile")
 			if err != nil {
 				panic(err)
 			}
 
-			fmt.Println(f)
+			// golang version, os, arch
+			f = strings.Replace(f, "{{version}}", command.Imports.GoVersion, 1)
+			f = strings.Replace(f, "{{GOOS}}", command.Imports.OperatingSystem, 1)
+			f = strings.Replace(f, "{{GOARCH}}", command.Imports.Architecture, 1)
 
-			// todo: implement the base logic
-			// todo: get user inputs
+			if er := filesystem.WriteFile(f, "Dockerfile"); er != nil {
+				panic(err)
+			}
+
 			// todo: make files
 			// todo: process files with inputs
 			// todo: generate output files

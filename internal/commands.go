@@ -80,7 +80,9 @@ func (r Root) BuildCommand() *cobra.Command {
 		Long:  "create docker compose and dockerfile",
 		Run: func(cmd *cobra.Command, args []string) {
 			if ok, err := exists("build"); err != nil && !ok {
-				panic(err)
+				r.Logger.Error(ErrDuplicateDirectory)
+
+				return
 			}
 
 			if err := os.Mkdir("build", 0750); err != nil {
@@ -94,7 +96,9 @@ func (r Root) BuildCommand() *cobra.Command {
 
 			f, err := filesystem.ReadFile("src/runtime/Dockerfile")
 			if err != nil {
-				panic(err)
+				r.Logger.Error(ErrModuleNotFound)
+
+				return
 			}
 
 			// golang version, os, arch
@@ -108,7 +112,9 @@ func (r Root) BuildCommand() *cobra.Command {
 
 			f, err = filesystem.ReadFile("src/runtime/docker-compose.yaml")
 			if err != nil {
-				panic(err)
+				r.Logger.Error(ErrModuleNotFound)
+
+				return
 			}
 
 			// todo: process files with inputs

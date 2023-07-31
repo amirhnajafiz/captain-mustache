@@ -9,7 +9,3 @@ services:
             - 'host.docker.internal:host-gateway'
         ports:
             - "{{port}}:{{port}}"
-        volumes:
-            - '.:/var/www/html'
-        networks:
-            - mustache

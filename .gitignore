@@ -12,3 +12,6 @@
 docker_out/
 
 captain-mustache
+
+build/
+docker-compose.yaml

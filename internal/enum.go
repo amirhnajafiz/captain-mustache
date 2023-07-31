@@ -3,13 +3,7 @@ package internal
 import "github.com/AlecAivazis/survey/v2"
 
 type (
-	CommandType int
-	StubType    int
-)
-
-const (
-	MainCommand CommandType = iota + 1
-	StubCommand
+	StubType int
 )
 
 const (

@@ -117,7 +117,7 @@ func (r Root) BuildCommand() *cobra.Command {
 				return
 			}
 
-			// todo: process files with inputs
+			f = strings.Replace(f, "{{ports}}", "8080", 2)
 
 			if err := filesystem.WriteFile("docker-compose.yaml", f); err != nil {
 				panic(err)

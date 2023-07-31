@@ -18,6 +18,6 @@ type (
 		GoVersion       string `survey:"go-version"`
 		Architecture    string `survey:"architecture"`
 		OperatingSystem string `survey:"operating-system"`
-		Port            int    `survey:"system-port"`
+		Port            string `survey:"system-port"`
 	}
 )

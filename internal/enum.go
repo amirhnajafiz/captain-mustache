@@ -38,6 +38,14 @@ var (
 				Default: "linux",
 			},
 		},
+		{
+			Name: "system-port",
+			Prompt: &survey.Input{
+				Message: "What is your system HTTP port on?",
+				Default: "80",
+			},
+			Validate: survey.Required,
+		},
 	}
 
 	dbQuestion = &survey.Select{

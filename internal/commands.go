@@ -96,7 +96,9 @@ func (r Root) BuildCommand() *cobra.Command {
 
 			command, err := importBaseQuestions()
 			if err != nil {
-				panic(err)
+				r.Logger.Error(err)
+
+				return
 			}
 
 			f, err := filesystem.ReadFile(DockerFileAddress)
@@ -112,7 +114,9 @@ func (r Root) BuildCommand() *cobra.Command {
 			f = strings.Replace(f, "{{GOARCH}}", command.Imports.Architecture, 1)
 
 			if er := filesystem.WriteFile(f, "build/Dockerfile"); er != nil {
-				panic(err)
+				r.Logger.Error(er)
+
+				return
 			}
 
 			f, err = filesystem.ReadFile(DockerComposeAddress)
@@ -124,9 +128,13 @@ func (r Root) BuildCommand() *cobra.Command {
 
 			f = strings.Replace(f, "{{port}}", command.Imports.Port, 2)
 
-			if err := filesystem.WriteFile("docker-compose.yaml", f); err != nil {
-				panic(err)
+			if er := filesystem.WriteFile("docker-compose.yaml", f); er != nil {
+				r.Logger.Error(er)
+
+				return
 			}
+
+			r.Logger.Info("dockerfiles created!")
 		},
 	}
 }

@@ -101,7 +101,7 @@ func (r Root) BuildCommand() *cobra.Command {
 				return
 			}
 
-			f, err := filesystem.ReadFile(DockerFileAddress)
+			dockerFile, err := filesystem.ReadFile(DockerFileAddress)
 			if err != nil {
 				r.Logger.Error(ErrModuleNotFound)
 
@@ -109,26 +109,26 @@ func (r Root) BuildCommand() *cobra.Command {
 			}
 
 			// golang version, os, arch
-			f = strings.Replace(f, "{{version}}", command.Imports.GoVersion, 1)
-			f = strings.Replace(f, "{{GOOS}}", command.Imports.OperatingSystem, 1)
-			f = strings.Replace(f, "{{GOARCH}}", command.Imports.Architecture, 1)
+			dockerFile = strings.Replace(dockerFile, "{{version}}", command.Imports.GoVersion, 1)
+			dockerFile = strings.Replace(dockerFile, "{{GOOS}}", command.Imports.OperatingSystem, 1)
+			dockerFile = strings.Replace(dockerFile, "{{GOARCH}}", command.Imports.Architecture, 1)
 
-			if er := filesystem.WriteFile(f, "build/Dockerfile"); er != nil {
+			if er := filesystem.WriteFile(dockerFile, "build/Dockerfile"); er != nil {
 				r.Logger.Error(er)
 
 				return
 			}
 
-			f, err = filesystem.ReadFile(DockerComposeAddress)
+			dockerComposeFile, err := filesystem.ReadFile(DockerComposeAddress)
 			if err != nil {
 				r.Logger.Error(ErrModuleNotFound)
 
 				return
 			}
 
-			f = strings.Replace(f, "{{port}}", command.Imports.Port, 2)
+			dockerComposeFile = strings.Replace(dockerComposeFile, "{{port}}", command.Imports.Port, 2)
 
-			if er := filesystem.WriteFile("docker-compose.yaml", f); er != nil {
+			if er := filesystem.WriteFile(dockerComposeFile, "docker-compose.yaml"); er != nil {
 				r.Logger.Error(er)
 
 				return

@@ -117,7 +117,7 @@ func (r Root) BuildCommand() *cobra.Command {
 				return
 			}
 
-			f = strings.Replace(f, "{{ports}}", command.Imports.Port, 2)
+			f = strings.Replace(f, "{{port}}", command.Imports.Port, 2)
 
 			if err := filesystem.WriteFile("docker-compose.yaml", f); err != nil {
 				panic(err)

@@ -1,22 +1,26 @@
 package internal
 
-import "github.com/AlecAivazis/survey/v2"
+import (
+	"fmt"
+
+	"github.com/AlecAivazis/survey/v2"
+)
 
 // importBaseQuestions returns the base user inputs
 func importBaseQuestions() (*Command, error) {
-	tmp := new(BaseImports)
+	cmd := new(BaseImports)
 
-	if err := survey.Ask(dockerfileQuestions, tmp); err != nil {
-		return nil, err
+	if err := survey.Ask(dockerfileQuestions, cmd); err != nil {
+		return nil, fmt.Errorf("failed to get inputs error=%w", err)
 	}
 
 	list, er := importSubCommands()
 	if er != nil {
-		return nil, er
+		return nil, fmt.Errorf("failed to get sub inputs error=%w", er)
 	}
 
 	return &Command{
-		Imports:     tmp,
+		Imports:     cmd,
 		SubCommands: list,
 	}, nil
 }
@@ -43,14 +47,14 @@ func importSubCommands() ([]*SubCommand, error) {
 			Options: []string{"Yes", "No"},
 			Default: "No",
 		}, &databaseFlag); err != nil {
-			return nil, err
+			return nil, fmt.Errorf("failed to get survey input error=%w", err)
 		}
 
 		if databaseFlag == "Yes" {
 			var tmp string
 
 			if err := survey.AskOne(dbQuestion, &tmp); err != nil {
-				return nil, err
+				return nil, fmt.Errorf("failed to get survey input error=%w", err)
 			}
 
 			tmpCommand := &SubCommand{
@@ -59,9 +63,7 @@ func importSubCommands() ([]*SubCommand, error) {
 			}
 
 			commands = append(commands, tmpCommand)
-
 			dbQuestion.Options = remove(dbQuestion.Options, tmp)
-
 			dbMessage = "Do you want to have another database?"
 		} else {
 			break
@@ -74,14 +76,13 @@ func importSubCommands() ([]*SubCommand, error) {
 		Options: []string{"Yes", "No"},
 		Default: "No",
 	}, &networkFlag); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to get survey input error=%w", err)
 	}
 
 	if networkFlag == "Yes" {
 		tmpCommand := &SubCommand{
 			Stub: NetworkStub,
 		}
-
 		commands = append(commands, tmpCommand)
 	}
 
@@ -91,14 +92,13 @@ func importSubCommands() ([]*SubCommand, error) {
 		Options: []string{"Yes", "No"},
 		Default: "No",
 	}, &volumeFlag); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to get survey input error=%w", err)
 	}
 
 	if volumeFlag == "Yes" {
 		tmpCommand := &SubCommand{
 			Stub: VolumeStub,
 		}
-
 		commands = append(commands, tmpCommand)
 	}
 

@@ -11,6 +11,11 @@ import (
 	"github.com/spf13/cobra"
 )
 
+const (
+	DockerFileAddress    = "src/runtime/Dockerfile"
+	DockerComposeAddress = "src/runtime/docker-compose.yaml"
+)
+
 type Root struct {
 	Logger logger.Logger
 }
@@ -94,7 +99,7 @@ func (r Root) BuildCommand() *cobra.Command {
 				panic(err)
 			}
 
-			f, err := filesystem.ReadFile("src/runtime/Dockerfile")
+			f, err := filesystem.ReadFile(DockerFileAddress)
 			if err != nil {
 				r.Logger.Error(ErrModuleNotFound)
 
@@ -110,7 +115,7 @@ func (r Root) BuildCommand() *cobra.Command {
 				panic(err)
 			}
 
-			f, err = filesystem.ReadFile("src/runtime/docker-compose.yaml")
+			f, err = filesystem.ReadFile(DockerComposeAddress)
 			if err != nil {
 				r.Logger.Error(ErrModuleNotFound)
 

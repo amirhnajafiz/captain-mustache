@@ -54,7 +54,6 @@ func importSubCommands() ([]*SubCommand, error) {
 			}
 
 			tmpCommand := &SubCommand{
-				Type:  StubCommand,
 				Stub:  DatabaseStub,
 				Param: tmp,
 			}
@@ -80,7 +79,6 @@ func importSubCommands() ([]*SubCommand, error) {
 
 	if networkFlag == "Yes" {
 		tmpCommand := &SubCommand{
-			Type: StubCommand,
 			Stub: NetworkStub,
 		}
 
@@ -98,7 +96,6 @@ func importSubCommands() ([]*SubCommand, error) {
 
 	if volumeFlag == "Yes" {
 		tmpCommand := &SubCommand{
-			Type: StubCommand,
 			Stub: VolumeStub,
 		}
 

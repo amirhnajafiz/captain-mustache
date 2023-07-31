@@ -3,7 +3,6 @@ package internal
 type (
 	// SubCommand all network, stubs, volumes are subcommands
 	SubCommand struct {
-		Type  CommandType
 		Stub  StubType
 		Param string
 	}
@@ -19,5 +18,6 @@ type (
 		GoVersion       string `survey:"go-version"`
 		Architecture    string `survey:"architecture"`
 		OperatingSystem string `survey:"operating-system"`
+		Port            int    `survey:"system-port"`
 	}
 )

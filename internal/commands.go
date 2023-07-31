@@ -1,11 +1,11 @@
 package internal
 
 import (
-	"github.com/amirhnajafiz/captain-mustache/pkg/filesystem"
 	"os"
 	"os/exec"
 	"strings"
 
+	"github.com/amirhnajafiz/captain-mustache/pkg/filesystem"
 	"github.com/amirhnajafiz/captain-mustache/pkg/logger"
 
 	"github.com/spf13/cobra"

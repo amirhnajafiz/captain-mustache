@@ -3,7 +3,6 @@ package internal
 type (
 	// SubCommand all network, stubs, volumes are subcommands
 	SubCommand struct {
-		Stub  StubType
 		Param string
 	}
 

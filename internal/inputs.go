@@ -30,8 +30,6 @@ func importSubCommands() ([]*SubCommand, error) {
 	var (
 		commands     = make([]*SubCommand, 0)
 		databaseFlag string
-		volumeFlag   string
-		networkFlag  string
 	)
 
 	dbMessage := "Do you want to have database?"
@@ -58,7 +56,6 @@ func importSubCommands() ([]*SubCommand, error) {
 			}
 
 			tmpCommand := &SubCommand{
-				Stub:  DatabaseStub,
 				Param: tmp,
 			}
 
@@ -68,38 +65,6 @@ func importSubCommands() ([]*SubCommand, error) {
 		} else {
 			break
 		}
-	}
-
-	// network selection
-	if err := survey.AskOne(&survey.Select{
-		Message: "Do you want to have network?",
-		Options: []string{"Yes", "No"},
-		Default: "No",
-	}, &networkFlag); err != nil {
-		return nil, fmt.Errorf("failed to get survey input error=%w", err)
-	}
-
-	if networkFlag == "Yes" {
-		tmpCommand := &SubCommand{
-			Stub: NetworkStub,
-		}
-		commands = append(commands, tmpCommand)
-	}
-
-	// volume selection
-	if err := survey.AskOne(&survey.Select{
-		Message: "Do you want to have volume?",
-		Options: []string{"Yes", "No"},
-		Default: "No",
-	}, &volumeFlag); err != nil {
-		return nil, fmt.Errorf("failed to get survey input error=%w", err)
-	}
-
-	if volumeFlag == "Yes" {
-		tmpCommand := &SubCommand{
-			Stub: VolumeStub,
-		}
-		commands = append(commands, tmpCommand)
 	}
 
 	return commands, nil

@@ -2,16 +2,6 @@ package internal
 
 import "github.com/AlecAivazis/survey/v2"
 
-type (
-	StubType int
-)
-
-const (
-	DatabaseStub StubType = iota + 1
-	VolumeStub
-	NetworkStub
-)
-
 var (
 	dockerfileQuestions = []*survey.Question{
 		{

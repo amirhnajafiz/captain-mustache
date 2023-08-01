@@ -3,16 +3,19 @@ services:
     golang.build:
         container_name: golang-mustache
         build:
-            context: {{context}}
-            dockerfile: Dockerfile
+            context: .
+            dockerfile: build/Dockerfile
         extra_hosts:
             - 'host.docker.internal:host-gateway'
         ports:
             - "{{port}}:{{port}}"
-        {{volume}}
-        {{network}}
+        networks:
+            - mustache
     {{stubs}}
 
-{{volume-instance}}
+volumes:
+    mustache-volume:
   
-{{network-instance}}
+networks:
+    mustache:
+        driver: bridge

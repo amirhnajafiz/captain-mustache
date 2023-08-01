@@ -1,3 +1,0 @@
-networks:
-  mustache:
-    driver: bridge

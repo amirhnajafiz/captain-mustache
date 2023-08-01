@@ -14,16 +14,16 @@ import (
 )
 
 const (
-	DockerFileAddress    = "src/runtime/Dockerfile"
-	DockerComposeAddress = "src/runtime/docker-compose.yaml"
+	DockerFileAddress    = "/src/runtime/Dockerfile"
+	DockerComposeAddress = "/src/runtime/docker-compose.yaml"
 )
 
 var (
 	stubs = map[string]string{
-		"redis":      "src/stubs/database/redis.yaml",
-		"mongodb":    "src/stubs/database/mongodb.yaml",
-		"postgresql": "src/stubs/database/postgresql.yaml",
-		"mysql":      "src/stubs/database/mysql.yaml",
+		"redis":      "/src/stubs/database/redis.yaml",
+		"mongodb":    "/src/stubs/database/mongodb.yaml",
+		"postgresql": "/src/stubs/database/postgresql.yaml",
+		"mysql":      "/src/stubs/database/mysql.yaml",
 	}
 )
 
@@ -107,13 +107,15 @@ func (r Root) BuildCommand() *cobra.Command {
 		Short: "create manifest",
 		Long:  "create docker compose and dockerfile",
 		Run: func(cmd *cobra.Command, args []string) {
-			if ok, err := exists("main.go"); err != nil && !ok {
+			stragoPath := os.Getenv("STRAGO_PATH")
+
+			if ok, err := exists("main.go"); err != nil || !ok {
 				r.Logger.Error(ErrMainFile)
 
 				return
 			}
 
-			if ok, err := exists("go.mod"); err != nil && !ok {
+			if ok, err := exists("go.mod"); err != nil || !ok {
 				r.Logger.Error(ErrDirectoryStructure)
 
 				return
@@ -144,7 +146,7 @@ func (r Root) BuildCommand() *cobra.Command {
 				return
 			}
 
-			dockerFile, err := filesystem.ReadFile(DockerFileAddress)
+			dockerFile, err := filesystem.ReadFile(stragoPath + DockerFileAddress)
 			if err != nil {
 				r.Logger.Error(ErrModuleNotFound)
 
@@ -162,7 +164,7 @@ func (r Root) BuildCommand() *cobra.Command {
 				return
 			}
 
-			dockerComposeFile, err := filesystem.ReadFile(DockerComposeAddress)
+			dockerComposeFile, err := filesystem.ReadFile(stragoPath + DockerComposeAddress)
 			if err != nil {
 				r.Logger.Error(ErrModuleNotFound)
 
@@ -174,7 +176,7 @@ func (r Root) BuildCommand() *cobra.Command {
 			str := ""
 
 			for _, c := range command.SubCommands {
-				tmp, er := filesystem.ReadFile(stubs[c])
+				tmp, er := filesystem.ReadFile(stragoPath + stubs[c])
 				if er != nil {
 					r.Logger.Error(er)
 

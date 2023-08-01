@@ -6,15 +6,15 @@ import (
 	"github.com/AlecAivazis/survey/v2"
 )
 
-// importBaseQuestions returns the base user inputs
-func importBaseQuestions() (*Command, error) {
+// getInputs returns the base user command
+func getInputs() (*Command, error) {
 	cmd := new(Command)
 
 	if err := survey.Ask(dockerfileQuestions, cmd); err != nil {
 		return nil, fmt.Errorf("failed to get inputs error=%w", err)
 	}
 
-	list, er := importSubCommands()
+	list, er := getStubs()
 	if er != nil {
 		return nil, fmt.Errorf("failed to get sub inputs error=%w", er)
 	}
@@ -24,8 +24,8 @@ func importBaseQuestions() (*Command, error) {
 	return cmd, nil
 }
 
-// importSubCommand will create sub commands
-func importSubCommands() ([]string, error) {
+// getStubs will create sub commands
+func getStubs() ([]string, error) {
 	var (
 		commands      = make([]string, 0)
 		databaseFlag  string

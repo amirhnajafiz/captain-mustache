@@ -104,7 +104,7 @@ func (r Root) BuildCommand() *cobra.Command {
 				panic(err)
 			}
 
-			command, err := importBaseQuestions()
+			command, err := getInputs()
 			if err != nil {
 				r.Logger.Error(err)
 
@@ -119,9 +119,9 @@ func (r Root) BuildCommand() *cobra.Command {
 			}
 
 			// golang version, os, arch
-			dockerFile = strings.Replace(dockerFile, "{{version}}", command.Imports.GoVersion, 1)
-			dockerFile = strings.Replace(dockerFile, "{{GOOS}}", command.Imports.OperatingSystem, 1)
-			dockerFile = strings.Replace(dockerFile, "{{GOARCH}}", command.Imports.Architecture, 1)
+			dockerFile = strings.Replace(dockerFile, "{{version}}", command.GoVersion, 1)
+			dockerFile = strings.Replace(dockerFile, "{{GOOS}}", command.OperatingSystem, 1)
+			dockerFile = strings.Replace(dockerFile, "{{GOARCH}}", command.Architecture, 1)
 
 			if er := filesystem.WriteFile(dockerFile, "build/Dockerfile"); er != nil {
 				r.Logger.Error(er)
@@ -136,12 +136,12 @@ func (r Root) BuildCommand() *cobra.Command {
 				return
 			}
 
-			dockerComposeFile = strings.Replace(dockerComposeFile, "{{port}}", command.Imports.Port, 2)
+			dockerComposeFile = strings.Replace(dockerComposeFile, "{{port}}", command.Port, 2)
 
 			str := ""
 
 			for _, c := range command.SubCommands {
-				tmp, er := filesystem.ReadFile(stubs[c.Param])
+				tmp, er := filesystem.ReadFile(stubs[c])
 				if er != nil {
 					r.Logger.Error(er)
 

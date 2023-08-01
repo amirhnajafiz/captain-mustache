@@ -16,6 +16,15 @@ const (
 	DockerComposeAddress = "src/runtime/docker-compose.yaml"
 )
 
+var (
+	stubs = map[string]string{
+		"redis":      "src/stubs/database/redis.yaml",
+		"mongodb":    "src/stubs/database/mongodb.yaml",
+		"postgresql": "src/stubs/database/postgresql.yaml",
+		"mysql":      "src/stubs/database/mysql.yaml",
+	}
+)
+
 type Root struct {
 	Logger logger.Logger
 }

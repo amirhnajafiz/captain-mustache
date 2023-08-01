@@ -5,6 +5,7 @@ import (
 	"os"
 	"os/exec"
 	"strings"
+	"time"
 
 	"github.com/amirhnajafiz/captain-mustache/pkg/filesystem"
 	"github.com/amirhnajafiz/captain-mustache/pkg/logger"
@@ -51,6 +52,8 @@ func (r Root) UpCommand() *cobra.Command {
 			if err := root.Start(); err != nil {
 				r.Logger.Error(ErrSystemDocker)
 			}
+
+			time.Sleep(1 * time.Second)
 		},
 	}
 }
@@ -70,6 +73,8 @@ func (r Root) DownCommand() *cobra.Command {
 			if err := root.Start(); err != nil {
 				r.Logger.Error(ErrSystemDocker)
 			}
+
+			time.Sleep(1 * time.Second)
 		},
 	}
 }
@@ -89,6 +94,8 @@ func (r Root) StatusCommand() *cobra.Command {
 			if err := root.Start(); err != nil {
 				r.Logger.Error(ErrSystemDocker)
 			}
+
+			time.Sleep(1 * time.Second)
 		},
 	}
 }

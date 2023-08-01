@@ -1,6 +1,7 @@
 package internal
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 	"strings"
@@ -136,6 +137,21 @@ func (r Root) BuildCommand() *cobra.Command {
 			}
 
 			dockerComposeFile = strings.Replace(dockerComposeFile, "{{port}}", command.Imports.Port, 2)
+
+			str := ""
+
+			for _, c := range command.SubCommands {
+				tmp, er := filesystem.ReadFile(stubs[c.Param])
+				if er != nil {
+					r.Logger.Error(er)
+
+					return
+				}
+
+				str = fmt.Sprintf("%s\n%s", str, tmp)
+			}
+
+			dockerComposeFile = strings.Replace(dockerComposeFile, "{{stubs}}", str, 1)
 
 			if er := filesystem.WriteFile(dockerComposeFile, "docker-compose.yaml"); er != nil {
 				r.Logger.Error(er)

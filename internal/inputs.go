@@ -8,7 +8,7 @@ import (
 
 // importBaseQuestions returns the base user inputs
 func importBaseQuestions() (*Command, error) {
-	cmd := new(BaseImports)
+	cmd := new(Command)
 
 	if err := survey.Ask(dockerfileQuestions, cmd); err != nil {
 		return nil, fmt.Errorf("failed to get inputs error=%w", err)
@@ -19,27 +19,23 @@ func importBaseQuestions() (*Command, error) {
 		return nil, fmt.Errorf("failed to get sub inputs error=%w", er)
 	}
 
-	return &Command{
-		Imports:     cmd,
-		SubCommands: list,
-	}, nil
+	cmd.SubCommands = list
+
+	return cmd, nil
 }
 
 // importSubCommand will create sub commands
-func importSubCommands() ([]*SubCommand, error) {
+func importSubCommands() ([]string, error) {
 	var (
-		commands     = make([]*SubCommand, 0)
-		databaseFlag string
+		commands      = make([]string, 0)
+		databaseFlag  string
+		dummyVariable string
+
+		dbMessage = "Do you want to have database?"
 	)
 
-	dbMessage := "Do you want to have database?"
-
 	// db selection
-	for {
-		if len(dbQuestion.Options) == 0 {
-			break
-		}
-
+	for len(dbQuestion.Options) > 0 {
 		if err := survey.AskOne(&survey.Select{
 			Message: dbMessage,
 			Options: []string{"Yes", "No"},
@@ -49,18 +45,12 @@ func importSubCommands() ([]*SubCommand, error) {
 		}
 
 		if databaseFlag == "Yes" {
-			var tmp string
-
-			if err := survey.AskOne(dbQuestion, &tmp); err != nil {
+			if err := survey.AskOne(dbQuestion, &dummyVariable); err != nil {
 				return nil, fmt.Errorf("failed to get survey input error=%w", err)
 			}
 
-			tmpCommand := &SubCommand{
-				Param: tmp,
-			}
-
-			commands = append(commands, tmpCommand)
-			dbQuestion.Options = remove(dbQuestion.Options, tmp)
+			commands = append(commands, dummyVariable)
+			dbQuestion.Options = remove(dbQuestion.Options, dummyVariable)
 			dbMessage = "Do you want to have another database?"
 		} else {
 			break

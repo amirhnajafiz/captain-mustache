@@ -112,14 +112,22 @@ func (r Root) BuildCommand() *cobra.Command {
 				return
 			}
 
-			if ok, err := exists("build"); err != nil && !ok {
+			if ok, err := exists("build"); err == nil && ok {
+				r.Logger.Error(ErrDuplicateDirectory)
+
+				return
+			}
+
+			if ok, err := exists("docker-compose.yaml"); err == nil && ok {
 				r.Logger.Error(ErrDuplicateDirectory)
 
 				return
 			}
 
 			if err := os.Mkdir("build", 0750); err != nil {
-				panic(err)
+				r.Logger.Error(ErrDuplicateDirectory)
+
+				return
 			}
 
 			command, err := getInputs()

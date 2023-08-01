@@ -1,5 +1,12 @@
 # Captain Mustache
 
+![GitHub release (with filter)](https://img.shields.io/github/v/release/amirhnajafiz/captain-mustache)
+![GitHub language count](https://img.shields.io/github/languages/count/amirhnajafiz/captain-mustache)
+![GitHub top language](https://img.shields.io/github/languages/top/amirhnajafiz/captain-mustache)
+![GitHub Repo stars](https://img.shields.io/github/stars/amirhnajafiz/captain-mustache)
+
+
+
 Dockerize your Golang applications under Captain *Mustache*. 
 A fast, safe, dynamic way to create dockerfiles for you golang applications.
 With this tool you don't need to know docker to dockerize your applications, 

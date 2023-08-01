@@ -9,3 +9,10 @@ services:
             - 'host.docker.internal:host-gateway'
         ports:
             - "{{port}}:{{port}}"
+        {{volume}}
+        {{network}}
+    {{stubs}}
+
+{{volume-instance}}
+  
+{{network-instance}}

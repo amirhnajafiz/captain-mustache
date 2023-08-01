@@ -6,11 +6,10 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/amirhnajafiz/captain-mustache)
 
 
-
 Dockerize your Golang applications under Captain *Mustache*. 
 A fast, safe, dynamic way to create dockerfiles for you golang applications.
 With this tool you don't need to know docker to dockerize your applications, 
-all you need is to have docker installed on your system.
+all you need is to have ```Go``` and ```Docker``` installed on your system.
 
 ## Table of contents
 
@@ -25,6 +24,18 @@ Clone into the project repository and build the executable file using the follow
 ```shell
 git clone https://github.com/amirhnajafiz/captain-mustache.git
 make build
+```
+
+Now you can run ```captain-mustache``` command in order to use the cli.
+
+### env path
+
+In order to use ```captain-mustache``` in every place on your system, make sure to
+the followings to either ```~/.zshrc```, ```~/.bash_profile```, or ```~/.bashrc```.
+
+```shell
+export PATH="<path-to-cloned-repository>:$PATH"
+export STRAGO_PATH="<path-to-cloned-repository>"
 ```
 
 ## Commands

@@ -37,13 +37,19 @@ func (r Root) UpCommand() *cobra.Command {
 		Short: "start containers",
 		Long:  "start docker containers by using docker compose up",
 		Run: func(cmd *cobra.Command, args []string) {
+			if ok, err := exists("build"); err != nil && !ok {
+				r.Logger.Error(ErrNoBuildFile)
+
+				return
+			}
+
 			root := exec.Command("docker", "compose", "up", "-d")
 
 			root.Stdout = os.Stdout
 			root.Stderr = os.Stderr
 
 			if err := root.Start(); err != nil {
-				r.Logger.Error(err)
+				r.Logger.Error(ErrSystemDocker)
 			}
 		},
 	}
@@ -62,7 +68,7 @@ func (r Root) DownCommand() *cobra.Command {
 			root.Stderr = os.Stderr
 
 			if err := root.Start(); err != nil {
-				r.Logger.Error(err)
+				r.Logger.Error(ErrSystemDocker)
 			}
 		},
 	}
@@ -81,7 +87,7 @@ func (r Root) StatusCommand() *cobra.Command {
 			root.Stderr = os.Stderr
 
 			if err := root.Start(); err != nil {
-				r.Logger.Error(err)
+				r.Logger.Error(ErrSystemDocker)
 			}
 		},
 	}
@@ -94,6 +100,18 @@ func (r Root) BuildCommand() *cobra.Command {
 		Short: "create manifest",
 		Long:  "create docker compose and dockerfile",
 		Run: func(cmd *cobra.Command, args []string) {
+			if ok, err := exists("main.go"); err != nil && !ok {
+				r.Logger.Error(ErrMainFile)
+
+				return
+			}
+
+			if ok, err := exists("go.mod"); err != nil && !ok {
+				r.Logger.Error(ErrDirectoryStructure)
+
+				return
+			}
+
 			if ok, err := exists("build"); err != nil && !ok {
 				r.Logger.Error(ErrDuplicateDirectory)
 

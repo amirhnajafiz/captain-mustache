@@ -1,3 +1,7 @@
+<div align="center">
+  <img src=".github/logo.png" alt="logo" />
+</div>
+
 # Captain Mustache
 
 ![GitHub release (with filter)](https://img.shields.io/github/v/release/amirhnajafiz/captain-mustache)

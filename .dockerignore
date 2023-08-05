@@ -1,0 +1,12 @@
+tests/
+vendor/
+
+.DS_Store
+README.md
+
+.idea/
+.vscode/
+
+.gitignore
+.git/
+.github/

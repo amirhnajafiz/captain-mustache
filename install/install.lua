@@ -2,15 +2,16 @@
 -- constant variables
 --
 local GIT_REPO = "https://github.com/amirhnajafiz/captain-mustache.git";
-local MESSAGE = "In order to use `captain-mustache` in every place on your system, make sure to" +
-                 "the followings to either `~/.zshrc`, `~/.bash_profile`, or `~/.bashrc`." + "\n";
-local EXPORT = "export PATH=\"<path-to-cloned-repository>:`$PATH`\"" + "\n" +
-               "export STRAGO_PATH="<path-to-cloned-repository>"";
+local MESSAGE = "In order to use `captain-mustache` in every place on your system, make sure to" ..
+                 "the followings to either `~/.zshrc`, `~/.bash_profile`, or `~/.bashrc`. \n";
+local EXPORT = '\t export PATH="<path-to-cloned-repository>:$PATH"\n' ..
+               '\t export STRAGO_PATH="<path-to-cloned-repository>"\n'
 
 
 --
 -- importing bash module
 --
+require "luarocks.loader"
 local sh = require('sh');
 
 --

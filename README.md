@@ -49,9 +49,10 @@ export STRAGO_PATH="<path-to-cloned-repository>"
 
 If you have ```lua``` installed on your system, just download the installation
 file in ```install``` directory, after that you can install this package
-using the following command:
+using the following commands:
 
 ```shell
+luarocks install sh
 lue install.lue
 ```
 

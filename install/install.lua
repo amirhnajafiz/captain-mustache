@@ -18,16 +18,25 @@ local sh = require('sh');
 -- build our commands
 --
 local cloneCommand = sh.command('git', 'clone');
-local makeFileCommand = sh.command('make');
-local echoCommand = sh.command('echo');
+local goBuild = sh.command('go', 'build' , '-o', 'captain-mustache');
+local chmodCommand = sh.command('chmod', '+x');
+
+print('Cloning ...');
 
 --
 -- clone into repository
 --
 cloneCommand(GIT_REPO);
 
---- build
-makeFileCommand('build');
+print('Building ...');
 
-echoCommand(MESSAGE);
-echoCommand(EXPORT);
+--- build
+goBuild('./captain-mustache/main.go');
+
+local renameCommand = sh.command('mv', './captain-mustache/main', './captain-mustache/captain-mustache');
+renameCommand();
+
+chmodCommand('./captain-mustache/captain-mustache');
+
+print(MESSAGE);
+print(EXPORT);

@@ -16,6 +16,7 @@ import (
 const (
 	DockerFileAddress    = "/src/runtime/Dockerfile"
 	DockerComposeAddress = "/src/runtime/docker-compose.yaml"
+	DockerIgnoreAddress  = "/.dockerignore"
 )
 
 var (
@@ -189,6 +190,19 @@ func (r Root) BuildCommand() *cobra.Command {
 			dockerComposeFile = strings.Replace(dockerComposeFile, "{{stubs}}", str, 1)
 
 			if er := filesystem.WriteFile(dockerComposeFile, "docker-compose.yaml"); er != nil {
+				r.Logger.Error(er)
+
+				return
+			}
+
+			dockerIgnore, err := filesystem.ReadFile(stragoPath + DockerIgnoreAddress)
+			if err != nil {
+				r.Logger.Error(ErrModuleNotFound)
+
+				return
+			}
+
+			if er := filesystem.WriteFile(dockerIgnore, ".dockerignore"); err != nil {
 				r.Logger.Error(er)
 
 				return

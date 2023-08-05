@@ -1,11 +1,13 @@
 --
 -- constant variables
 --
+local DIRECTORY = os.getenv("PWD") .. '/captain-mustache';
+
 local GIT_REPO = "https://github.com/amirhnajafiz/captain-mustache.git";
 local MESSAGE = "In order to use `captain-mustache` in every place on your system, make sure to" ..
                  "the followings to either `~/.zshrc`, `~/.bash_profile`, or `~/.bashrc`. \n";
-local EXPORT = '\t export PATH="<path-to-cloned-repository>:$PATH"\n' ..
-               '\t export STRAGO_PATH="<path-to-cloned-repository>"\n'
+local EXPORT = '\t export PATH="' .. DIRECTORY .. ':$PATH"\n' ..
+               '\t export STRAGO_PATH="' .. DIRECTORY .. '"\n'
 
 
 --
@@ -36,6 +38,7 @@ goBuild('./captain-mustache/main.go');
 local renameCommand = sh.command('mv', './captain-mustache/main', './captain-mustache/captain-mustache');
 renameCommand();
 
+--- change mode
 chmodCommand('./captain-mustache/captain-mustache');
 
 print(MESSAGE);

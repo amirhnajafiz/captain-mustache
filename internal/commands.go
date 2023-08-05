@@ -16,7 +16,7 @@ import (
 const (
 	DockerFileAddress    = "/src/runtime/Dockerfile"
 	DockerComposeAddress = "/src/runtime/docker-compose.yaml"
-	DockerIgnoreAddress  = "/.dockerignore"
+	DockerIgnoreAddress  = "/src/.dockerignore"
 )
 
 var (

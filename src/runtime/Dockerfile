@@ -1,5 +1,5 @@
 # Start from the latest golang base image
-FROM golang-{{version}}:alpine AS builder
+FROM golang:{{version}}-alpine AS builder
 
 # maintainer
 MAINTAINER "amirhnajafiz"

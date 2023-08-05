@@ -12,16 +12,17 @@
 
 Dockerize your Golang applications under Captain *Mustache*. 
 A fast, safe, dynamic way to create dockerfiles for you golang applications.
+This CLI helps you to build Docker manifests in and dockerize your system.
 With this tool you don't need to know docker to dockerize your applications, 
 all you need is to have ```Go``` and ```Docker``` installed on your system.
 
 ## Table of contents
 
-- [Install](#how-to-use)
+- [Install](#installation)
 - [Commands](#commands)
 - [Stubs](#stubs)
 
-## How to use?
+## Installation
 
 Clone into the project repository and build the executable file using the following commands:
 
@@ -44,7 +45,8 @@ export STRAGO_PATH="<path-to-cloned-repository>"
 
 ## Commands
 
-In here you can find a list of cli commands.
+In here you can find a list of cli commands. You can run ```help``` command in order
+to get a list of available commands and their usage.
 
 |   Command    | Description                                              |
 |:------------:|----------------------------------------------------------|
@@ -52,17 +54,14 @@ In here you can find a list of cli commands.
 |   ```up```   | Start building docker containers                         |
 |  ```down```  | Stop docker containers                                   |
 | ```status``` | Displays a status of your containers                     |
+|  ```help```  | CLI help                                                 |
 
 ## Stubs
 
-Available stubs on captain mustache.
+Available stubs on captain mustache. Stubs are external services that you may have
+along your Golang service. Like databases, message brokers, or email services.
+Stubs will be optional when building your manifests.
 
 |   Stub   | Description                                     | Values                                  |
 |:--------:|-------------------------------------------------|-----------------------------------------|
 | Database | Create database containers for your application | ```redis, mongodb, mysql, postgresql``` |
-
-## Supported OS
-
-- MacOS
-- Linux
-- Windows

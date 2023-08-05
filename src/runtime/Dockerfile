@@ -2,7 +2,9 @@
 FROM golang-{{version}}:alpine AS builder
 
 # maintainer
-LABEL maintainer="Amirhossein Najafizade"
+MAINTAINER "amirhnajafiz"
+LABEL app="golang"
+LABEL func="service"
 
 # timezon set
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone

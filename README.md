@@ -19,6 +19,8 @@ all you need is to have ```Go``` and ```Docker``` installed on your system.
 ## Table of contents
 
 - [Install](#installation)
+  - [Env](#env-path)
+  - [Script](#lua)
 - [Commands](#commands)
 - [Stubs](#stubs)
 
@@ -43,6 +45,16 @@ export PATH="<path-to-cloned-repository>:$PATH"
 export STRAGO_PATH="<path-to-cloned-repository>"
 ```
 
+### lua
+
+If you have ```lua``` installed on your system, just download the installation
+file in ```install``` directory, after that you can install this package
+using the following command:
+
+```shell
+lue install.lue
+```
+
 ## Commands
 
 In here you can find a list of cli commands. You can run ```help``` command in order
@@ -65,3 +77,7 @@ Stubs will be optional when building your manifests.
 |   Stub   | Description                                     | Values                                  |
 |:--------:|-------------------------------------------------|-----------------------------------------|
 | Database | Create database containers for your application | ```redis, mongodb, mysql, postgresql``` |
+
+## Contribute
+
+Feel free to make your contribution to this project by creating a merge request.
